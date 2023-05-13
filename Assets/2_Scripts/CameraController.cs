@@ -23,7 +23,6 @@ public class CameraController : MonoBehaviour
 
     public void FocusMode()
     {
-        //transform.position = playerC.fcpos.position + new Vector3(0, .5f, 0);
         transform.position = Vector3.Lerp(transform.position, 
                                         playerC.focuscampos.position + new Vector3(0, .5f, 0), 
                                         smoothrotationn * Time.deltaTime); ;
@@ -31,20 +30,20 @@ public class CameraController : MonoBehaviour
     }
     public void FreeMode(float mouseX)
     {
-        //transform.position = Vector3.Lerp(transform.position,
-        //                                playerC.freecampos.position, mouseX *
-        //                                smoothrotationn * Time.deltaTime); ;
-        //transform.forward = playerPivot.position - transform.position;
         transform.RotateAround(playerPivot.position, Vector3.up, speedRotation * mouseX * Time.deltaTime);
     }
-    public bool TransitionMode(Vector3 target)
+    public void TransitionMode(Vector3 target)
     {
-        if(transform.position == target)
+        
+        if (transform.position != target)
         {
             transform.position = Vector3.Lerp(transform.position, target, smoothtransition * Time.deltaTime);
+            Debug.Log(target);
+            print(target);
             endtransition = true;
+
         }
-        return endtransition;
+        
     }
 
 }

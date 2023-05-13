@@ -22,7 +22,6 @@ public class PlayerController : LiveEntity
     // Start is called before the first frame update
     void Start()
     {
-        //anim = GetComponent<Animator>();
         camcontrol = GameManager.instance.camcontrol;
         rb = GetComponent<Rigidbody>();    
     }
@@ -46,13 +45,10 @@ public class PlayerController : LiveEntity
         {
             //direcciono el movimiento del player en base a donde mira la camara
             if (focus)
-            {
-
-                transform.position += camcontrol.transform.forward * v * speed * Time.deltaTime;
+            { 
+                transform.position += transform.forward * v * speed * Time.deltaTime;
                 transform.RotateAround(target.transform.position, Vector3.up, h * smoothnessrotation * Time.deltaTime);
-                transform.forward = target.transform.position - transform.position;
-                //transform.position += cam.transform.right * h * speedFocus * Time.deltaTime * percentSpeed;
-                //transform.position += cam.transform.forward * v * speedFocus * Time.deltaTime;
+                transform.forward = (target.transform.position) - transform.position;
             }
             else
             {
@@ -63,13 +59,7 @@ public class PlayerController : LiveEntity
                                             new Vector3(camcontrol.transform.forward.x, 0, camcontrol.transform.forward.z),
                                             smoothnessrotation);
             }
-            //transform.position += cam.transform.forward * v * speed * Time.deltaTime;
-            //transform.position += cam.transform.right * h * speed * Time.deltaTime;
-            //giro el personaje en direccion donde apunta la camara con un leve smooth
-
-
-            //transform.position += transform.forward * v * speed * Time.deltaTime;
-            //transform.position += transform.right * h * speed * Time.deltaTime;
+            
             anim.SetBool("walk", true);
         }
         else
@@ -94,10 +84,10 @@ public class PlayerController : LiveEntity
 
         if (Input.GetButtonDown("FocusMode"))
         {
-
+            camcontrol.endtransition = false;
             if (!focus)
             {
-                camcontrol.endtransition = true;
+                
                 anim.SetBool("focus", true);
                 focus = true;
             }
@@ -143,13 +133,16 @@ public class PlayerController : LiveEntity
         }
         else
         {
+            Debug.Log("transicion de camera");
             if (focus)
             {
-                camcontrol.TransitionMode(freecampos.position - focuscampos.position);
+                Debug.Log(" a free");
+                camcontrol.TransitionMode(freecampos.position);
 
             }
             else
             {
+                Debug.Log(" a focus");
                 camcontrol.TransitionMode(focuscampos.position);
             }
         }

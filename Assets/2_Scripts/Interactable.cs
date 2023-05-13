@@ -16,8 +16,7 @@ public class Interactable : MonoBehaviour
 
     // Start is called before the first frame update
     private void OnTriggerEnter(Collider other)
-    {
-        Debug.Log("que pedo" + other.gameObject.name);
+    {;
         if (other.gameObject.name == playerRef.gameObject.name)
         {
             Destroy(this.gameObject);
