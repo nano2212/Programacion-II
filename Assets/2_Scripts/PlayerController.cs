@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : LiveEntity
+public class PlayerController : LifeEntity
 {
     [SerializeField] Rigidbody rb;
     [SerializeField] CameraController camcontrol;
@@ -10,6 +10,8 @@ public class PlayerController : LiveEntity
     [SerializeField] float speed = 5;
     [SerializeField] float smoothnessrotation =5;
     [SerializeField] float angle;
+    [SerializeField] GameObject hitbox;
+    [SerializeField] Transform hitPos;
 
     public Transform focuscampos;
     public Transform freecampos;
@@ -18,15 +20,17 @@ public class PlayerController : LiveEntity
     public bool focus;
 
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
+        base.Start();
         camcontrol = GameManager.instance.camcontrol;
         rb = GetComponent<Rigidbody>();    
     }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
+        base.Update();
         PlayerInputs();
         CameraController();
     }
@@ -85,7 +89,6 @@ public class PlayerController : LiveEntity
             camcontrol.endtransition = false;
             if (!focus)
             {
-                
                 anim.SetBool("focus", true);
                 focus = true;
             }
@@ -147,5 +150,9 @@ public class PlayerController : LiveEntity
             }
         }
         
+    }
+    private void Attack()
+    {
+        Instantiate(hitbox, hitPos);
     }
 }

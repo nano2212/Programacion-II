@@ -2,52 +2,50 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LifeComponent 
+namespace Entities.LifeSystem
 {
-    [SerializeField] int life = 0;
-    [SerializeField] int maxlife = 0;
-    public LifeComponent(int _initiallife, int _maxlife)
+    public class LifeComponent
     {
-        life = _initiallife;
-        maxlife = _maxlife;
-    }
-    
-    public int Life
-    {
-        get
+        [SerializeField] int life = 100;
+        [SerializeField] int maxlife = 100;
+        public LifeComponent(int _initiallife, int _maxlife)
         {
-            return life;
+            life = _initiallife;
+            maxlife = _maxlife;
         }
-        set
+
+        public int Life
         {
-            if (value > maxlife)
+            get
             {
-                life = maxlife;
+                return life;
             }
-            else return;
-            if (value < 0)
+            set
             {
-                life = 0;
+                if (value > maxlife)
+                {
+                    life = maxlife;
+                }
+                else if (value < 0)
+                {
+                    life = 0;
+                }
+                else
+                {
+                    life = value;
+                }
             }
-            else return;
-            
-            life = value;
-            
         }
-    }
 
-    public void Death()
-    {
+        public void Hit(int dmg)
+        {
+            life -= dmg;
+        }
 
-    }
-
-    public void Hit(int dmg)
-    {
-        life -= dmg;
-    }
-
-    public void Heal(int heal)
-    {
-        life += heal;
+        public void Heal(int heal)
+        {
+            life += heal;
+        }
     }
 }
+
