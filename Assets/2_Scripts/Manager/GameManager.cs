@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public Transform playerTransform;
     public PlayerController player;
     public CameraController camcontrol;
     

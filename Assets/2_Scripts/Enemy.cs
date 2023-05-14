@@ -18,7 +18,7 @@ public class Enemy : LifeEntity
 
     protected virtual void Attack()
     {
-
+        
     }
 
     protected override void Death()

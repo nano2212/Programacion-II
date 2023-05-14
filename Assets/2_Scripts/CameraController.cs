@@ -17,7 +17,7 @@ public class CameraController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playerPivot = GameManager.instance.playerTransform;
+        playerPivot = GameManager.instance.player.transform;
         playerC = GameManager.instance.player;
     }
 

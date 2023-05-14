@@ -7,20 +7,24 @@ public class LifeEntity : MonoBehaviour
     LifeComponent life;
     [SerializeField] int maxLife;
 
+    protected virtual void Start()
+    {
+        life = new LifeComponent(maxLife, maxLife);
+    }
     protected virtual void Death()
     {
 
     }
 
-    // Start is called before the first frame update
-    protected virtual void Start()
+    protected virtual void TakeDamage(int dmg)
     {
-        life = new LifeComponent(maxLife, maxLife);
+        life.Life -= dmg;
     }
+    
 
-    // Update is called once per frame
-    void Update()
-    {
+    //// Update is called once per frame
+    //void Update()
+    //{
         
-    }
+    //}
 }

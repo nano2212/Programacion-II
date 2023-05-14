@@ -10,7 +10,7 @@ public class CamSmooth : MonoBehaviour
 
     public void Start()
     {
-        playerTrans = GameManager.instance.playerTransform;
+        playerTrans = GameManager.instance.player.transform;
     }
 
     // Update is called once per frame
