@@ -8,7 +8,6 @@ public class PlayerController : LiveEntity
     [SerializeField] CameraController camcontrol;
     [SerializeField] float forcejump = 2;
     [SerializeField] float speed = 5;
-    [SerializeField] float speedFocus = 2;
     [SerializeField] float smoothnessrotation =5;
     [SerializeField] float angle;
 
@@ -16,7 +15,6 @@ public class PlayerController : LiveEntity
     public Transform freecampos;
     public Transform target;
     public Animator anim;
-
     public bool focus;
 
     // Start is called before the first frame update
@@ -133,9 +131,11 @@ public class PlayerController : LiveEntity
         }
         else
         {
+            camcontrol.endtransition = false;
             Debug.Log("transicion de camera");
             if (focus)
             {
+                
                 Debug.Log(" a free");
                 camcontrol.TransitionMode(freecampos.position);
 
