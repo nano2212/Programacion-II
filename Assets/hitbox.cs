@@ -19,7 +19,6 @@ public class hitbox : MonoBehaviour
         if (life)
         {
             Debug.Log(other.gameObject.name);
-            Debug.Log("golpea");
             life.TakeDamage(dmg);
         }
         Destroy(this.gameObject);

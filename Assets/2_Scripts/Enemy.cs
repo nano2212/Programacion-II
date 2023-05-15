@@ -34,4 +34,8 @@ public class Enemy : LifeEntity
         base.Update();
         //agent.SetDestination(target.position);
     }
+    private void Persecution()
+    {
+
+    }
 }

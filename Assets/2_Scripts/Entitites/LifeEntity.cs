@@ -25,9 +25,9 @@ public class LifeEntity : MonoBehaviour
 
     public virtual void TakeDamage(int dmg)
     {
-        Debug.Log("Daña");
+        
         life.Life -= dmg;
-        Debug.Log(life.Life);
+        Debug.Log("le quito "+life.Life);
     }
 
 
@@ -36,7 +36,7 @@ public class LifeEntity : MonoBehaviour
     {
         if (life.Life == 0)
         {
-            Debug.Log(life.Life + this.gameObject.name + " debe morir");
+            Debug.Log(life.Life + " " + this.gameObject.name + " debe morir");
             Death();
         }
     }
