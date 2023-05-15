@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
 {
     public PlayerController player;
     public CameraController camcontrol;
+    public Transform camRef;
     
     List<Enemy> enemies;     // Start is called before the first frame update
     List<Interactable> interactable;
