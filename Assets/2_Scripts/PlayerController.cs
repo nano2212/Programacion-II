@@ -17,7 +17,9 @@ public class PlayerController : LifeEntity
     public Transform freecampos;
     public Transform target;
     public Animator anim;
+
     public bool focus;
+    public bool ontarget;
 
     protected override void Awake()
     {
@@ -64,7 +66,7 @@ public class PlayerController : LifeEntity
             else
             {
                 transform.position += transform.forward * v * speed * Time.deltaTime;
-                transform.RotateAround(target.transform.position, Vector3.up, h * smoothnessrotation * Time.deltaTime);
+                transform.RotateAround(target.transform.position, Vector3.up, h * -smoothnessrotation * Time.deltaTime);
                 transform.forward = (target.transform.position) - transform.position;
                 
             }
@@ -141,8 +143,8 @@ public class PlayerController : LifeEntity
                 camcontrol.FreeMode(x);
             }
             else
-            {
-                camcontrol.FocusMode();
+            {   
+                camcontrol.FocusMode(x, ontarget);
             }
         }
         else

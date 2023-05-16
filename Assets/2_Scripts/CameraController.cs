@@ -26,12 +26,15 @@ public class CameraController : MonoBehaviour
         
     }
 
-    public void FocusMode()
+    public void FocusMode(float mouseX, bool ontarget)
     {
         transform.position = Vector3.Lerp(transform.position, 
                                         playerC.focuscampos.position + new Vector3(0, .5f, 0), 
                                         smoothrotationn * Time.deltaTime); ;
-        transform.forward = playerPivot.forward;
+        //transform.forward = playerPivot.forward - new Vector3(0, .5F, 0);
+
+        transform.rotation = Quaternion.Slerp(transform.rotation, playerPivot.rotation, smoothrotationn * Time.deltaTime);
+        transform.Rotate(transform.up * Time.deltaTime * speedRotation *  mouseX);
     }
     public void FreeMode(float mouseX)
     {
