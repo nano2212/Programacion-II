@@ -98,6 +98,7 @@ Transform:
   - {fileID: 5876277228627350951}
   - {fileID: 6198644668940564486}
   - {fileID: 7799951231226608372}
+  - {fileID: 1314589050044302982}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -113,11 +114,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35438136c21dccb46bd244237ef288fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  defending: 0
   maxLife: 0
   rb: {fileID: 0}
   camcontrol: {fileID: 0}
   forcejump: 5.5
   speed: 9
+  speedRotF: 5
   smoothnessrotation: 50
   angle: 0
   hitbox: {fileID: 0}
@@ -127,6 +130,7 @@ MonoBehaviour:
   target: {fileID: 0}
   anim: {fileID: 6198644670433855632}
   focus: 0
+  ontarget: 0
 --- !u!54 &6198644670433855638
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -271,6 +275,37 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!1 &8111423270830185289
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1314589050044302982}
+  m_Layer: 0
+  m_Name: FreeCamPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1314589050044302982
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8111423270830185289}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 2.4, z: -13.57}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6198644670433855637}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &6198644669001347660
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -362,4 +397,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09db8ec74e8fa3e48ba0188a05bec9cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  defending: 0
   maxLife: 0

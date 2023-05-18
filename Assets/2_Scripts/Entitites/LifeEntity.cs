@@ -6,6 +6,7 @@ using Entities.LifeSystem;
 public class LifeEntity : MonoBehaviour
 {
     LifeComponent life;
+    public bool defending;
     [SerializeField] int maxLife;
 
     protected virtual void Awake()
@@ -19,15 +20,18 @@ public class LifeEntity : MonoBehaviour
     }
     protected virtual void Death()
     {
-        Destroy(gameObject);
+        Destroy(this.gameObject);
         Debug.Log("Morido");
     }
 
     public virtual void TakeDamage(int dmg)
     {
+        if (!defending)
+        {
+            life.Life -= dmg;
+            Debug.Log("quedan " + life.Life + " HP");
+        }
         
-        life.Life -= dmg;
-        Debug.Log("le quito "+life.Life);
     }
 
 

@@ -8,6 +8,7 @@ public class PlayerController : LifeEntity
     [SerializeField] CameraController camcontrol;
     [SerializeField] float forcejump = 2;
     [SerializeField] float speed = 5;
+    [SerializeField] float speedRotF = 5;
     [SerializeField] float smoothnessrotation =5;
     [SerializeField] float angle;
     [SerializeField] GameObject hitbox;
@@ -32,7 +33,6 @@ public class PlayerController : LifeEntity
     protected override void Start()
     {
         base.Start();
-        print(freecampos);
         camcontrol.InitCam(freecampos);
     }
 
@@ -45,6 +45,7 @@ public class PlayerController : LifeEntity
     }
     private void PlayerInputs()
     {
+        float x = Input.GetAxis("Mouse X");
         float v = Input.GetAxis("Vertical");
         float h = Input.GetAxis("Horizontal");
         anim.SetFloat("x", h);
@@ -52,31 +53,60 @@ public class PlayerController : LifeEntity
 
         //Movimiento
         #region
-        if ((v != 0 || h != 0) && !anim.GetBool("blocking"))
+
+        if (!anim.GetBool("blocking"))
         {
-            //direcciono el movimiento del player en base a donde mira la camara
-            if (!focus)
+
+            if((v != 0 || h != 0) && !focus)
             {
+
+                anim.SetBool("walk", true);
                 transform.position += camcontrol.transform.forward * v * speed * Time.deltaTime;
                 transform.position += camcontrol.transform.right * h * speed * Time.deltaTime;
                 transform.forward = Vector3.Lerp(transform.forward,
                                             new Vector3(camcontrol.transform.forward.x, 0, camcontrol.transform.forward.z),
-                                            smoothnessrotation *Time.deltaTime);
+                                            smoothnessrotation * Time.deltaTime);
+            }
+            else if((v != 0 || h != 0 || x != 0) && focus)
+            {
+                anim.SetBool("walk", true);
+                transform.position += transform.forward * v * speed * Time.deltaTime;
+                transform.position += camcontrol.transform.right * h * speed * Time.deltaTime;
+                transform.Rotate(transform.up * Time.deltaTime * speedRotF * x);
             }
             else
             {
-                transform.position += transform.forward * v * speed * Time.deltaTime;
-                transform.RotateAround(target.transform.position, Vector3.up, h * -smoothnessrotation * Time.deltaTime);
-                transform.forward = (target.transform.position) - transform.position;
-                
+                anim.SetBool("walk", false);
             }
-            
-            anim.SetBool("walk", true);
+
         }
-        else
-        {
-            anim.SetBool("walk", false);
-        }
+        //if ((v != 0 || h != 0 /*|| x != 0*/) && !anim.GetBool("blocking"))
+        //{
+        //    //direcciono el movimiento del player en base a donde mira la camara
+        //    if (!focus )
+        //    {
+        //        transform.position += camcontrol.transform.forward * v * speed * Time.deltaTime;
+        //        transform.position += camcontrol.transform.right * h * speed * Time.deltaTime;
+        //        transform.forward = Vector3.Lerp(transform.forward,
+        //                                    new Vector3(camcontrol.transform.forward.x, 0, camcontrol.transform.forward.z),
+        //                                    smoothnessrotation *Time.deltaTime);
+        //    }
+        //    else
+        //    {
+        //        transform.position += transform.forward * v * speed * Time.deltaTime;
+        //        transform.position += camcontrol.transform.right * h * speed * Time.deltaTime;
+        //        transform.Rotate(transform.up * Time.deltaTime * speedRotF * x);
+        //        //transform.RotateAround(target.transform.position, Vector3.up, h * -smoothnessrotation * Time.deltaTime);
+        //        //transform.forward = (target.transform.position) - transform.position;
+
+        //    }
+
+        //    anim.SetBool("walk", true);
+        //}
+        //else
+        //{
+        //    anim.SetBool("walk", false);
+        //}
         #endregion
 
         //Acciones
@@ -108,8 +138,6 @@ public class PlayerController : LifeEntity
         if (Input.GetKeyDown(KeyCode.Space))
         {
             anim.SetTrigger("jump");
-            rb.AddForce(Vector3.up * forcejump, ForceMode.Impulse);
-
         }
 
         #endregion        
@@ -144,7 +172,7 @@ public class PlayerController : LifeEntity
             }
             else
             {   
-                camcontrol.FocusMode(x, ontarget);
+                camcontrol.FocusMode(x);
             }
         }
         else
@@ -166,5 +194,9 @@ public class PlayerController : LifeEntity
     private void Attack()
     {
         Instantiate(hitbox, hitPos);
+    }
+    public void Jumping()
+    {
+        rb.AddForce(Vector3.up * forcejump, ForceMode.Impulse);
     }
 }
