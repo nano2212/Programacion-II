@@ -1737,7 +1737,7 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
@@ -1779,6 +1779,10 @@ MonoBehaviour:
   maxLife: 45
   agent: {fileID: 0}
   hitbox: {fileID: 3428155356440419247, guid: 280728e44e4d01e4683d2decbe02da2a, type: 3}
+  layermask:
+    serializedVersion: 2
+    m_Bits: 0
+  playeronview: 0
   isDead: 0
   rangeview: 15
   rangeattack: 3

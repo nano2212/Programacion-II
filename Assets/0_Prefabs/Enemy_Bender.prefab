@@ -49,7 +49,7 @@ CapsuleCollider:
   m_Radius: 0.49673367
   m_Height: 3.6214712
   m_Direction: 1
-  m_Center: {x: 0, y: -0.15, z: 0.03}
+  m_Center: {x: 0, y: 1.78, z: 0.03}
 --- !u!54 &1918230863011701297
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -62,7 +62,7 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
@@ -82,6 +82,10 @@ MonoBehaviour:
   maxLife: 60
   agent: {fileID: 0}
   hitbox: {fileID: 0}
+  layermask:
+    serializedVersion: 2
+    m_Bits: 128
+  playeronview: 0
   isDead: 0
   rangeview: 0
   rangeattack: 15
@@ -97,7 +101,7 @@ MonoBehaviour:
   _handl: {fileID: 0}
   handrspawn: {fileID: 3492050496206694612}
   handlspawn: {fileID: 734560803485683354}
-  rangeadvance: 3
+  rangeadvance: 5
   speedrotation: 600
   timeexpose: 1.8
   timespin: 5

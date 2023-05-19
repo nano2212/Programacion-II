@@ -15,7 +15,7 @@ public class InitialScene : MonoBehaviour
 
     public void ButtonPressed()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(5);
     }
     
 }

@@ -115,18 +115,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defending: 0
-  maxLife: 0
+  maxLife: 100
   rb: {fileID: 0}
   camcontrol: {fileID: 0}
   forcejump: 5.5
   speed: 9
-  speedRotF: 5
+  speedRotF: 400
   smoothnessrotation: 50
   angle: 0
-  hitbox: {fileID: 0}
-  hitPos: {fileID: 0}
+  hitbox: {fileID: 3428155356440419247, guid: 280728e44e4d01e4683d2decbe02da2a, type: 3}
+  hitPos: {fileID: 7799951231226608372}
   focuscampos: {fileID: 6198644668940564486}
-  freecampos: {fileID: 0}
+  freecampos: {fileID: 1314589050044302982}
   target: {fileID: 0}
   anim: {fileID: 6198644670433855632}
   focus: 0

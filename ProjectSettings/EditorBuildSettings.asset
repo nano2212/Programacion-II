@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/#Scenes/WhereAreYouGoing.unity
     guid: 9edc7c6ea091ad245a25e6343db48bff
+  - enabled: 1
+    path: Assets/#Scenes/Controls.unity
+    guid: 5567438b313917c4baf74192e5f939da
   m_configObjects: {}
