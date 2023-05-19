@@ -7,7 +7,8 @@ public class Enemy : LifeEntity
 {
     [Header("Compónentes")]
     public NavMeshAgent agent;
-    public GameObject hitbox;    
+    public GameObject hitbox;
+    
 
     [Header("Referencias")]
     protected Transform target;
@@ -39,14 +40,13 @@ public class Enemy : LifeEntity
     [SerializeField] protected float smoothtarget;
 
     [Header("otros")]
-    Renderer render;
+    public Renderer rendermodel;
     // Start is called before the first frame update
     protected override void Start()
     {
         base.Start();
         cooldown = cooldownref + Random.Range(-cooldownvar, cooldownvar);
         agent = GetComponent<NavMeshAgent>();
-        render = GetComponent<Renderer>();
         playerC = GameManager.instance.player;
         target = playerC.transform;
     }
@@ -89,7 +89,7 @@ public class Enemy : LifeEntity
                         Debug.Log("tERMINO LA DEFENSA");
                         defensetime = 0;
                         defending = false;
-                        render.material.SetColor("_Color", Color.white);
+                        rendermodel.material.SetColor("_Color", Color.white);
                     }
                 }
 
@@ -137,7 +137,7 @@ public class Enemy : LifeEntity
     }
     protected virtual void Defense()
     {
-        render.material.SetColor("_Color", Color.blue);
+        rendermodel.material.SetColor("_Color", Color.blue);
         Debug.Log("defensa");
         defending = true;
     }

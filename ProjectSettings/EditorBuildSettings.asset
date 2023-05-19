@@ -11,4 +11,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/#Scenes/Test_Level.unity
     guid: 44c97ee05fe102f4b91e18b595579fc5
+  - enabled: 1
+    path: Assets/#Scenes/CreditScene.unity
+    guid: 777fd7a0e8413ee4fb188450e19cad8d
+  - enabled: 1
+    path: Assets/#Scenes/ChoiceScene.unity
+    guid: 4527c9b0a75ded746bf077b01e35722b
+  - enabled: 1
+    path: Assets/#Scenes/WhereAreYouGoing.unity
+    guid: 9edc7c6ea091ad245a25e6343db48bff
   m_configObjects: {}
