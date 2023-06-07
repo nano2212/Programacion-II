@@ -5,11 +5,9 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public PlayerController player;
+    public GameObject playerGO;
     public CameraController camcontrol;
     public Transform camRef;
-    
-    List<Enemy> enemies;     // Start is called before the first frame update
-    List<Interactable> interactable;
 
     public static GameManager instance;
 

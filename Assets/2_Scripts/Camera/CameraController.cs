@@ -29,9 +29,10 @@ public class CameraController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        _camRef = GameManager.instance.camRef;
         playerPivot = GameManager.instance.player.transform;
         playerC = GameManager.instance.player;
-        _camRef = GameManager.instance.camRef;
+        
         cameraObj = GetComponent<Camera>();
         distcams = Vector3.Distance(playerC.focuscampos.position, playerC.freecampos.position);
     }
@@ -43,23 +44,6 @@ public class CameraController : MonoBehaviour
         transform.forward = playerPivot.forward;
         
     }
-    //public void FocusMode(float mouseX, bool ontarget)
-    //{
-    //    if (ontarget)
-    //    {
-    //        transform.position = Vector3.Lerp(transform.position,
-    //                                    playerC.focuscampos.position + new Vector3(0, .5f, 0),
-    //                                    smoothrotationn * Time.deltaTime);
-    //        transform.rotation = Quaternion.Slerp(transform.rotation, playerPivot.rotation, smoothrotationn * Time.deltaTime);
-    //        transform.Rotate(transform.up * Time.deltaTime * speedRotation * mouseX);
-    //    }
-    //    else
-    //    {
-    //        transform.position = playerC.focuscampos.position;
-    //        transform.forward = playerPivot.forward;
-    //    }
-        
-    //}
     public void FreeMode(float mouseX)
     {
         transform.RotateAround(playerPivot.position, Vector3.up, speedRotation * mouseX * Time.deltaTime);
@@ -77,13 +61,6 @@ public class CameraController : MonoBehaviour
             cameraObj.fieldOfView = freefield + (focusfield - freefield) * Vector3.Distance(transform.position, target) / distcams;
             transform.parent = _camRef;
         }
-
-        
-        //if (transform.position != target)
-        //{
-
-        //    transform.position = Vector3.Lerp(transform.position, target, smoothtransition * Time.deltaTime);
-        //}
         var dist = Vector3.Distance(transform.position, target);
         if (dist >= tolerancia)
         {

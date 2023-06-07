@@ -14,19 +14,26 @@ public class PlayerController : LifeEntity
     [SerializeField] float angle;
     [SerializeField] GameObject hitbox;
     [SerializeField] Transform hitPos;
+    [SerializeField] Transform basecapsule;
+    [SerializeField] Transform heightcapsule;
+    [SerializeField] float radiuscapsule;
+    [SerializeField] float actualDist;
+    Collider nearestCollider;
 
     public Transform focuscampos;
     public Transform freecampos;
     public Transform target;
     public Animator anim;
+    [SerializeField] LayerMask layermaskA;
 
     public bool focus;
     public bool ontarget;
+    public bool interaction = false;
 
     protected override void Awake()
     {
         base.Awake();
-        camcontrol = GameManager.instance.camcontrol;
+        
         rb = GetComponent<Rigidbody>();
     }
 
@@ -34,7 +41,9 @@ public class PlayerController : LifeEntity
     protected override void Start()
     {
         base.Start();
+        camcontrol = GameManager.instance.camcontrol;
         camcontrol.InitCam(freecampos);
+        actualDist = radiuscapsule;
     }
 
     // Update is called once per frame
@@ -81,42 +90,58 @@ public class PlayerController : LifeEntity
             }
 
         }
-     
+
         #endregion
 
         //Acciones
         #region 
-        if (Input.GetButtonDown("Fire1"))
+        if (!defending)
         {
-            anim.SetTrigger("punchB");
+            //Golpe B
+            if (Input.GetButtonDown("Fire1"))
+            {
+                anim.SetTrigger("punchB");
+            }
+            //Golpe A
+            if (Input.GetButtonDown("Fire2"))
+            {
+                anim.SetTrigger("punchA");
+            }
+            //Patada
+            if (Input.GetButtonDown("Fire3"))
+            {
+                anim.SetTrigger("kick");
+            }
         }
-
-        if (Input.GetButtonDown("Fire2"))
-        {
-            anim.SetTrigger("punchA");
-        }
-
-        if (Input.GetButtonDown("Fire3"))
-        {
-            anim.SetTrigger("kick");
-        }
+        
+        //Bloqueo
         if (Input.GetButtonDown("Block"))
         {
             anim.SetBool("blocking", true);
             defending = true;
         }
-
         if (Input.GetButtonUp("Block"))
         {
             anim.SetBool("blocking", false);
             defending = false;
         }
-
+        //Salto
         if (Input.GetKeyDown(KeyCode.Space))
         {
             anim.SetTrigger("jump");
         }
-
+        //Interactuar
+        if (Input.GetButtonDown("Interact"))
+        {
+            interaction = true;
+            var nearestinteractable = GetNearestObject();
+            if (nearestinteractable == null) return;
+            var interactable = nearestinteractable.GetComponent<Iinteractable>();
+            if (interactable != null)
+            {
+                interactable.Interact();
+            }
+        }
         #endregion        
 
         //Cambio de camara
@@ -136,6 +161,26 @@ public class PlayerController : LifeEntity
         }
 
         
+    }
+    private GameObject GetNearestObject()
+    {
+        Debug.Log("buscando interaccion");
+        Collider[] interactables = Physics.OverlapCapsule(basecapsule.position, heightcapsule.position, radiuscapsule, layermaskA);
+        foreach (Collider interactable in interactables)
+        {
+            var newDist = Vector3.Distance(transform.position, interactable.gameObject.transform.position);
+            if(newDist < actualDist)
+            {
+                actualDist = newDist;
+                nearestCollider = interactable;
+            }
+        }
+        var gameO = nearestCollider;
+        if (gameO != null)
+        {
+            return gameO.gameObject;
+        }
+        return null;
     }
     private void CameraController()
     {
@@ -186,6 +231,33 @@ public class PlayerController : LifeEntity
     public override void TakeDamage(int dmg)
     {
         base.TakeDamage(dmg);
-        anim.SetTrigger("Hit");
+        if(!defending) anim.SetTrigger("Hit");
     }
+
+    //Funciones clase abstracta PlayObject
+    #region
+    protected override void OnInitialize()
+    {
+    }
+
+    protected override void OnDeInitialize()
+    {
+    }
+
+    protected override void OnResume()
+    {
+    }
+
+    protected override void OnPause()
+    {
+    }
+
+    protected override void OnUpdate()
+    {
+    }
+
+    protected override void OnFixedUpdate()
+    {
+    }
+    #endregion
 }

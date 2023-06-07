@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Entities.LifeSystem;
 
-public class LifeEntity : MonoBehaviour
+public abstract class LifeEntity : PlayObject
 {
     LifeComponent life;
     public bool defending;

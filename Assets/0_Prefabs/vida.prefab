@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 862041856543325450}
   - component: {fileID: 862041856543325451}
   - component: {fileID: 862041856543325445}
-  - component: {fileID: 862041856543325444}
+  - component: {fileID: 2680271428391242726}
   m_Layer: 0
   m_Name: vida
   m_TagString: Untagged
@@ -130,7 +130,7 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.008200056
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &862041856543325444
+--- !u!114 &2680271428391242726
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -139,8 +139,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 520165009228153241}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 21956e2a1641a474bb6a60d993ae1bc3, type: 3}
+  m_Script: {fileID: 11500000, guid: b6ec48cc7e719fa4d950136b98527f23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsUpdating: 0
+  pobjects: []
   healthpoints: 10
-  playerRef: {fileID: 0}
