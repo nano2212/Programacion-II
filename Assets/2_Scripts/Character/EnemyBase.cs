@@ -106,5 +106,10 @@ public class EnemyBase : LifeEntity
     protected override void OnFixedUpdate()
     {
     }
+
+    protected override void OnLateUpdate()
+    {
+        throw new System.NotImplementedException();
+    }
     #endregion
 }

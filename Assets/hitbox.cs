@@ -5,6 +5,7 @@ using UnityEngine;
 public class hitbox : MonoBehaviour
 {
     int dmg = 5;
+    public AudioManager au_manager = null;
     [SerializeField] float timeDestroy;
     // Start is called before the first frame update
     void Start()
@@ -15,10 +16,12 @@ public class hitbox : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         LifeEntity life = other.gameObject.GetComponent<LifeEntity>();
-
+        AudioManager audiomanager = other.gameObject.GetComponent<AudioManager>();
+        
         if (life)
         {
-            Debug.Log(other.gameObject.name);
+            au_manager.PlaySound("hit");
+            audiomanager.PlaySound("damage");
             life.TakeDamage(dmg);
         }
         Destroy(this.gameObject);

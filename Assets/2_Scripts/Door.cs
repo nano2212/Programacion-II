@@ -68,5 +68,9 @@ public class Door : PlayObject, Iinteractable
     {
 
     }
+
+    protected override void OnLateUpdate()
+    {
+    }
     #endregion
 }

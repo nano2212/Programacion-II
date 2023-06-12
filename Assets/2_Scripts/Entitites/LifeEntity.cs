@@ -29,7 +29,6 @@ public abstract class LifeEntity : PlayObject
         if (!defending)
         {
             life.Life -= dmg;
-            Debug.Log("quedan " + life.Life + " HP");
         }
         
     }

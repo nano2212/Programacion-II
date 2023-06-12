@@ -88,13 +88,13 @@ Material:
     - Vector1_d69206dc4fba4596b4f269babfaf4cc1: 0.6
     - Vector1_f47f81ec635e453c8ca9794d4793a782: 0
     - _BumpScale: 1
-    - _Cutoff: 0.35
+    - _Cutoff: 0.484
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _GlossMapScale: 1
-    - _Glossiness: 0.582
+    - _Glossiness: 0.086
     - _GlossyReflections: 1
-    - _Metallic: 0.902
+    - _Metallic: 0
     - _Mode: 1
     - _OcclusionStrength: 1
     - _Parallax: 0.02
@@ -106,6 +106,6 @@ Material:
     m_Colors:
     - Color_f81cfcc9b99a474895c54af03c1fefd0: {r: 1, g: 1, b: 1, a: 0}
     - Vector2_ee3da453ee474862bd12028a3df74cd4: {r: 0, g: 0, b: 0, a: 0}
-    - _Color: {r: 0.9005358, g: 0.30962977, b: 0.9245283, a: 1}
+    - _Color: {r: 0.6462264, g: 1, b: 0.84586275, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []

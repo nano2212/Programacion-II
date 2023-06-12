@@ -44,10 +44,18 @@ public abstract class PlayObject : MonoBehaviour
             OnFixedUpdate();
         }
     }
+    void LateUpdate()
+    {
+        if (IsUpdating)
+        {
+            OnLateUpdate();
+        }
+    }
     protected abstract void OnInitialize();
     protected abstract void OnDeInitialize();
     protected abstract void OnResume();
     protected abstract void OnPause();
     protected abstract void OnUpdate();
+    protected abstract void OnLateUpdate();
     protected abstract void OnFixedUpdate();
 }

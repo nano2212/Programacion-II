@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class PlayerController : LifeEntity
 {
+    [SerializeField] AudioManager_Player audiomanager;
     [SerializeField] Rigidbody rb;
     [SerializeField] CameraController camcontrol;
     [SerializeField] float forcejump = 2;
@@ -13,11 +14,13 @@ public class PlayerController : LifeEntity
     [SerializeField] float smoothnessrotation =5;
     [SerializeField] float angle;
     [SerializeField] GameObject hitbox;
+    [SerializeField] GameObject instance_hitbox;
     [SerializeField] Transform hitPos;
     [SerializeField] Transform basecapsule;
     [SerializeField] Transform heightcapsule;
     [SerializeField] float radiuscapsule;
     [SerializeField] float actualDist;
+    Vector3 direction = new Vector3(0, 0, 0);
     Collider nearestCollider;
 
     public Transform focuscampos;
@@ -33,7 +36,7 @@ public class PlayerController : LifeEntity
     protected override void Awake()
     {
         base.Awake();
-        
+        audiomanager = GetComponent<AudioManager_Player>();
         rb = GetComponent<Rigidbody>();
     }
 
@@ -41,58 +44,21 @@ public class PlayerController : LifeEntity
     protected override void Start()
     {
         base.Start();
-        camcontrol = GameManager.instance.camcontrol;
+        camcontrol = GameManager.instance.camcontrol; 
         camcontrol.InitCam(freecampos);
         actualDist = radiuscapsule;
     }
 
     // Update is called once per frame
-    protected override void Update()
+    //protected override void Update()
+    //{
+    //    base.Update();
+    //    //PlayerInputs();
+    //    //CameraController();
+    //}
+
+    void PlayerInputs()
     {
-        base.Update();
-        PlayerInputs();
-        CameraController();
-    }
-    private void PlayerInputs()
-    {
-        float x = Input.GetAxis("Mouse X");
-        float v = Input.GetAxis("Vertical");
-        float h = Input.GetAxis("Horizontal");
-        anim.SetFloat("x", h);
-        anim.SetFloat("y", v);
-
-        //Movimiento
-        #region
-
-        if (!anim.GetBool("blocking"))
-        {
-
-            if((v != 0 || h != 0) && !focus)
-            {
-
-                anim.SetBool("walk", true);
-                transform.position += camcontrol.transform.forward * v * speed * Time.deltaTime;
-                transform.position += camcontrol.transform.right * h * speed * Time.deltaTime;
-                transform.forward = Vector3.Lerp(transform.forward,
-                                            new Vector3(camcontrol.transform.forward.x, 0, camcontrol.transform.forward.z),
-                                            smoothnessrotation * Time.deltaTime);
-            }
-            else if((v != 0 || h != 0 || x != 0) && focus)
-            {
-                anim.SetBool("walk", true);
-                transform.position += transform.forward * v * speed * Time.deltaTime;
-                transform.position += camcontrol.transform.right * h * speed * Time.deltaTime;
-                transform.Rotate(transform.up * Time.deltaTime * speedRotF * x);
-            }
-            else
-            {
-                anim.SetBool("walk", false);
-            }
-
-        }
-
-        #endregion
-
         //Acciones
         #region 
         if (!defending)
@@ -113,7 +79,7 @@ public class PlayerController : LifeEntity
                 anim.SetTrigger("kick");
             }
         }
-        
+
         //Bloqueo
         if (Input.GetButtonDown("Block"))
         {
@@ -139,7 +105,9 @@ public class PlayerController : LifeEntity
             var interactable = nearestinteractable.GetComponent<Iinteractable>();
             if (interactable != null)
             {
+                Debug.Log("interactuo");
                 interactable.Interact();
+                interactable = null;
             }
         }
         #endregion        
@@ -159,6 +127,58 @@ public class PlayerController : LifeEntity
                 anim.SetBool("focus", false);
             }
         }
+
+    }
+
+    public void StepPlayer()
+    {
+        audiomanager.PlaySound("step");
+    }
+
+    private void PlayerMovements()
+    {
+        float x = Input.GetAxis("Mouse X");
+        float v = Input.GetAxis("Vertical");
+        float h = Input.GetAxis("Horizontal");
+        anim.SetFloat("x", h);
+        anim.SetFloat("y", v);
+        
+
+        //Movimiento
+        #region
+
+        if (!defending)
+        {
+
+            if((v != 0 || h != 0) && !focus)
+            {
+
+                anim.SetBool("walk", true);
+                direction = camcontrol.transform.forward.normalized * v + camcontrol.transform.right.normalized * h;
+                MovePlayer(direction);
+                //transform.position += camcontrol.transform.forward * v * speed * Time.deltaTime;
+                //transform.position += camcontrol.transform.right * h * speed * Time.deltaTime;
+                transform.forward = Vector3.Lerp(transform.forward,
+                                            new Vector3(camcontrol.transform.forward.x, 0, camcontrol.transform.forward.z),
+                                            smoothnessrotation * Time.deltaTime);
+            }
+            else if((v != 0 || h != 0 || x != 0) && focus)
+            {
+                anim.SetBool("walk", true);
+                direction = transform.forward.normalized * v + camcontrol.transform.right.normalized * h;
+                MovePlayer(direction);
+                //transform.position += transform.forward * v * speed * Time.deltaTime;
+                //transform.position += camcontrol.transform.right * h * speed * Time.deltaTime;
+                transform.Rotate(transform.up * Time.deltaTime * speedRotF * x);
+            }
+            else
+            {
+                anim.SetBool("walk", false);
+            }
+
+        }
+
+        #endregion
 
         
     }
@@ -213,9 +233,17 @@ public class PlayerController : LifeEntity
         }
         
     }
+
+    void MovePlayer(Vector3 _dir)
+    {
+        rb.MovePosition(rb.position + _dir * speed * Time.fixedDeltaTime);
+        //rb.AddForce(_dir * speed, ForceMode.Acceleration);
+//        rb.velocity = _dir * speed * Time.deltaTime;
+    }
     private void Attack()
     {
-        Instantiate(hitbox, hitPos);
+        instance_hitbox = Instantiate(hitbox, hitPos);
+        instance_hitbox.GetComponent<hitbox>().au_manager = audiomanager;
     }
     public void Jumping()
     {
@@ -254,10 +282,20 @@ public class PlayerController : LifeEntity
 
     protected override void OnUpdate()
     {
+        
+        
     }
 
     protected override void OnFixedUpdate()
     {
+        
+        PlayerMovements();
+        CameraController();
+    }
+
+    protected override void OnLateUpdate()
+    {
+        PlayerInputs();
     }
     #endregion
 }

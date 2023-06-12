@@ -25,6 +25,9 @@ public class HealthPoints : PlayObject, Iinteractable
     protected override void OnFixedUpdate()
     {
     }
+    protected override void OnLateUpdate()
+    {
+    }
     protected override void OnInitialize()
     {
     }

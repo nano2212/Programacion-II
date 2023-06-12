@@ -6,7 +6,9 @@ public class Enemy_Bender : EnemyBase
 {
     [SerializeField] GameObject hand;
     [SerializeField] GameObject _handr;
+    [SerializeField] AudioManager au_handr;
     [SerializeField] GameObject _handl;
+    [SerializeField] AudioManager au_handl;
     [SerializeField] Transform handrspawn;
     [SerializeField] Transform handlspawn;
     [SerializeField] float rangeadvance;
@@ -14,13 +16,18 @@ public class Enemy_Bender : EnemyBase
     [SerializeField] float timeexpose;
     [SerializeField] float timespin;
     [SerializeField] bool spin;
+    [SerializeField] float cont;
+    [SerializeField] float refcont;
     [SerializeField] bool walkagain;
     [SerializeField] bool _init;
     [SerializeField] Transform bendermodel;
+    public AudioManager_Enemy audiomanager;
+
     // Start is called before the first frame update
     protected override void Start()
     {
         base.Start();
+        audiomanager = GetComponent<AudioManager_Enemy>();
         cooldown = timespin;
         counter = timespin;
     }
@@ -97,6 +104,12 @@ public class Enemy_Bender : EnemyBase
     {
         defending = true;
         bendermodel.Rotate(bendermodel.up, speedrotation * Time.deltaTime);
+        cont += Time.deltaTime;
+        if (cont > refcont)
+        {
+            audiomanager.PlaySound("spin");
+            cont = 0;
+        }
     }
     void Exposed()
     {
@@ -110,6 +123,8 @@ public class Enemy_Bender : EnemyBase
         {
             _handr = Instantiate(hand, handrspawn);
             _handl = Instantiate(hand, handlspawn);
+            _handl.GetComponent<HitBox_2>().au_manager = audiomanager;
+            _handr.GetComponent<HitBox_2>().au_manager = audiomanager;
             rendermodel.material.SetColor("_Color", Color.blue);
             defending = true;
             cooldown = timespin;
