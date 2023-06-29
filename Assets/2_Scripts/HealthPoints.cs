@@ -13,11 +13,17 @@ public class HealthPoints : PlayObject, Iinteractable
     public void Interact()
     {
         Debug.Log("Oh he subido 10 de vida");
-        life.Heal(healthpoints);
-        Destroy(this.gameObject);
+        
     }
-
-     //Funciones clase abstracta PlayObject
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.name == "Player")
+        {
+            life.Heal(healthpoints);
+            Destroy(this.gameObject);
+        }
+    }
+    //Funciones clase abstracta PlayObject
     #region
     protected override void OnDeInitialize()
     {

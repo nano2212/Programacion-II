@@ -13,7 +13,7 @@ public class HitBox_2 : MonoBehaviour
         if (life)
         {
             au_manager.PlaySound("hit");
-            audiomanager.PlaySound("damage");
+            if(!life.defending) audiomanager.PlaySound("damage");
             life.TakeDamage(dmg);
         }
     }

@@ -21,6 +21,7 @@ public class Enemy_Bender : EnemyBase
     [SerializeField] bool walkagain;
     [SerializeField] bool _init;
     [SerializeField] Transform bendermodel;
+    public ParticleSystem chispas;
     public AudioManager_Enemy audiomanager;
 
     // Start is called before the first frame update
@@ -50,10 +51,12 @@ public class Enemy_Bender : EnemyBase
                     
                     if (spin)
                     {
+                        chispas.Stop();
                         Spin();
                     }
                     else
                     {
+                        
                         Exposed();
                     }
                 }
@@ -131,6 +134,7 @@ public class Enemy_Bender : EnemyBase
         }
         else
         {
+            chispas.Play();
             Destroy(_handr);
             Destroy(_handl);
             rendermodel.material.SetColor("_Color", Color.red);

@@ -5,7 +5,7 @@ using Entities.LifeSystem;
 
 public abstract class LifeEntity : PlayObject
 {
-    LifeComponent life;
+    public LifeComponent life;
     public bool defending;
     [SerializeField] int maxLife;
 

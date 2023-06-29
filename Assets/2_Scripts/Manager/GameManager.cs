@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     public GameObject playerGO;
     public CameraController camcontrol;
     public Transform camRef;
-
+    public bool nextLevel = false;
     public static GameManager instance;
 
     public void Awake()

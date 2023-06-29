@@ -36,6 +36,7 @@ public class EnemyBase : LifeEntity
     protected override void Start()
     {
         base.Start();
+        EnemyManager.instance.enemies.Add(this);
         agent = GetComponent<NavMeshAgent>();
         playerC = GameManager.instance.player;
         target = playerC.transform;
@@ -78,6 +79,7 @@ public class EnemyBase : LifeEntity
     protected override void Death()
     {
         base.Death();
+        EnemyManager.instance.enemies.Remove(this);
         isDead = true;
     }
 
