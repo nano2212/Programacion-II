@@ -251,9 +251,20 @@ public class PlayerController : LifeEntity
     }
     protected override void Death()
     {
-        base.Death();
-        SceneManager.LoadScene(3);
-        Cursor.lockState = CursorLockMode.None;
+        if(lives > 0)
+        {
+            lives--;
+            life.Life = 100;
+            GameManager.instance.GoTolastCheckPoint();
+            
+        }
+        else
+        {
+            SceneManager.LoadScene(3);
+            Cursor.lockState = CursorLockMode.None;
+        }
+        
+        
 
     }
     public override void TakeDamage(int dmg)

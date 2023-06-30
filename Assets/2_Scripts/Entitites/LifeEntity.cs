@@ -6,6 +6,7 @@ using Entities.LifeSystem;
 public abstract class LifeEntity : PlayObject
 {
     public LifeComponent life;
+    public int lives = 1;
     public bool defending;
     [SerializeField] int maxLife;
 
@@ -20,8 +21,8 @@ public abstract class LifeEntity : PlayObject
     }
     protected virtual void Death()
     {
+
         Destroy(this.gameObject);
-        Debug.Log("Morido");
     }
 
     public virtual void TakeDamage(int dmg)
@@ -45,7 +46,6 @@ public abstract class LifeEntity : PlayObject
     {
         if (life.Life == 0)
         {
-            Debug.Log(life.Life + " " + this.gameObject.name + " debe morir");
             Death();
         }
     }

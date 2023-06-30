@@ -161,7 +161,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -98.380005, y: -24.33}
+  m_AnchoredPosition: {x: -22, y: -24.33}
   m_SizeDelta: {x: 304.9, y: 75}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &242996
@@ -185,7 +185,7 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0, g: 0, b: 0, a: 0}
+    m_NormalColor: {r: 0.047058824, g: 0.007843138, b: 0.06666667, a: 1}
     m_HighlightedColor: {r: 0.6431373, g: 0.09411765, b: 0.93333334, a: 1}
     m_PressedColor: {r: 0.32156864, g: 0, b: 1, a: 1}
     m_SelectedColor: {r: 0, g: 0, b: 0, a: 0}
@@ -299,7 +299,7 @@ RectTransform:
   m_GameObject: {fileID: 81281018}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 4.1, y: 4.1, z: 4.1}
+  m_LocalScale: {x: 3.17, y: 3.17, z: 3.17}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1614277185}
@@ -332,7 +332,7 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0, g: 0, b: 0, a: 1}
+    m_NormalColor: {r: 0.044100855, g: 0.0064537814, b: 0.064, a: 1}
     m_HighlightedColor: {r: 0.6445531, g: 0.09251513, b: 0.9339623, a: 1}
     m_PressedColor: {r: 0.32156864, g: 0, b: 1, a: 1}
     m_SelectedColor: {r: 0, g: 0, b: 0, a: 0}
@@ -901,7 +901,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -34.16, y: -27.419998}
+  m_AnchoredPosition: {x: 37, y: -27.419998}
   m_SizeDelta: {x: 160, y: 75}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1487043836
@@ -925,7 +925,7 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0, g: 0, b: 0, a: 0}
+    m_NormalColor: {r: 0.062117632, g: 0.01035294, b: 0.088, a: 1}
     m_HighlightedColor: {r: 0.6431373, g: 0.09411765, b: 0.93333334, a: 1}
     m_PressedColor: {r: 0.32156864, g: 0, b: 1, a: 1}
     m_SelectedColor: {r: 0, g: 0, b: 0, a: 0}

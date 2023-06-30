@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class GameManager : MonoBehaviour
     public Transform camRef;
     public bool nextLevel = false;
     public static GameManager instance;
+    public Vector3 lastCheckPoint;
+    public Animator UiAnimator;
 
     public void Awake()
     {
@@ -28,5 +31,9 @@ public class GameManager : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
     }
-
+    public void GoTolastCheckPoint()
+    {
+        playerGO.transform.position = lastCheckPoint;
+    }
+    
 }

@@ -5,9 +5,11 @@ using UnityEngine.UI;
 using TMPro;
 public class UIManager : MonoBehaviour
 {
-    [SerializeField] TMP_Text text;
+    [SerializeField] TMP_Text enemiesUI;
+    [SerializeField] TMP_Text livesUI;
     [SerializeField] Image lifeUI;
     float lifePlayer;
+    int livesPlayer;
     List<EnemyBase> enemies;
     int totalEnemies;
     float maxLife;
@@ -15,6 +17,7 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
+        livesPlayer = GameManager.instance.player.lives;
         lifePlayer = GameManager.instance.player.life.Life;
         enemies = EnemyManager.instance.enemies;
     }
@@ -27,8 +30,8 @@ public class UIManager : MonoBehaviour
             totalEnemies = EnemyManager.instance.enemies.Count;
             forthebegin = false;
         }
-        text.text = enemies.Count.ToString() + " / " + totalEnemies.ToString();
+        livesUI.text = livesPlayer.ToString();
+        enemiesUI.text = enemies.Count.ToString() + " / " + totalEnemies.ToString();
         lifeUI.fillAmount = GameManager.instance.player.life.Life / maxLife;
-        Debug.Log(lifeUI.fillAmount);
     }
 }
