@@ -64,7 +64,8 @@ public class CameraController : MonoBehaviour
         var dist = Vector3.Distance(transform.position, target);
         if (dist >= tolerancia)
         {
-            transform.position = Vector3.Lerp(transform.position, target, smoothtransition * Time.deltaTime);
+            //transform.position = Vector3.Lerp(transform.position, target, smoothtransition * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, target, smoothtransition * Time.deltaTime);
         }
         else
         {

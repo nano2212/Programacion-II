@@ -10,6 +10,7 @@ public class PlayerController : LifeEntity
     [SerializeField] CameraController camcontrol;
     [SerializeField] float forcejump = 2;
     [SerializeField] float speed = 5;
+    [SerializeField] float speedFocus = 5;
     [SerializeField] float speedRotF = 5;
     [SerializeField] float smoothnessrotation =5;
     [SerializeField] float angle;
@@ -233,7 +234,15 @@ public class PlayerController : LifeEntity
 
     void MovePlayer(Vector3 _dir)
     {
-        rb.MovePosition(rb.position + _dir * speed * Time.fixedDeltaTime);
+        if (!focus)
+        {
+            rb.MovePosition(rb.position + _dir * speed * Time.fixedDeltaTime);
+        }
+        else
+        {
+            rb.MovePosition(rb.position + _dir * speedFocus * Time.fixedDeltaTime);
+        }
+        
         //rb.AddForce(_dir * speed, ForceMode.Acceleration);
 //        rb.velocity = _dir * speed * Time.deltaTime;
     }
