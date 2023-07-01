@@ -68,7 +68,6 @@ public class CameraController : MonoBehaviour
         }
         else
         {
-            print("Transición completa");
             endtransition = true;
         }
 

@@ -73,7 +73,6 @@ public class EnemyBase : LifeEntity
     protected virtual void Defense()
     {
         rendermodel.material.SetColor("_Color", Color.blue);
-        Debug.Log("defensa");
         defending = true;
     }
     protected override void Death()

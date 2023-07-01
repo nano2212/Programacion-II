@@ -21,7 +21,7 @@ public class hitbox : MonoBehaviour
         if (life)
         {
             au_manager.PlaySound("hit");
-            audiomanager.PlaySound("damage");
+            if (!life.defending) audiomanager.PlaySound("damage");
             life.TakeDamage(dmg);
         }
         Destroy(this.gameObject);

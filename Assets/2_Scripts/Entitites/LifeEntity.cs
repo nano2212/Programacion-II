@@ -37,8 +37,6 @@ public abstract class LifeEntity : PlayObject
     public virtual void Heal(int hp)
     {
         life.Life += hp;
-        Debug.Log("sumaste " + hp + " HP");
-        Debug.Log("Tenes " + life.Life + " HP");
     }
 
     // Update is called once per frame

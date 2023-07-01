@@ -12,10 +12,12 @@ public class Enemy_Racer : EnemyBase
     [SerializeField] protected float cooldownvar;
     [SerializeField] protected float defensetime;
     [SerializeField] protected float cooldowndefense;
+    public AudioManager_Enemy audiomanager;
 
     protected override void Start()
     {
         base.Start();
+        audiomanager = GetComponent<AudioManager_Enemy>();
         cooldown = cooldownref + Random.Range(-cooldownvar, cooldownvar);
         agent = GetComponent<NavMeshAgent>();
         playerC = GameManager.instance.player;
@@ -57,7 +59,6 @@ public class Enemy_Racer : EnemyBase
                     defensetime += Time.deltaTime;
                     if (defensetime >= cooldowndefense)
                     {
-                        Debug.Log("tERMINO LA DEFENSA");
                         defensetime = 0;
                         defending = false;
                         rendermodel.material.SetColor("_Color", Color.white);
@@ -71,7 +72,7 @@ public class Enemy_Racer : EnemyBase
     protected override void Attack()
     {
         var command = (int)Random.Range(0, 3);
-        print(command);
+        audiomanager.PlaySound("Hit");
         switch (command)
         {
             case 0:
@@ -90,14 +91,14 @@ public class Enemy_Racer : EnemyBase
 
     protected virtual void RightHand()
     {
-        Debug.Log("Piña derecha");
         var _hitbox = Instantiate(hitbox, rightspawn);
-        _hitbox.GetComponent<Renderer>().material.SetColor("_Color", Color.green);
+        _hitbox.GetComponent<hitbox>().au_manager = audiomanager;
+
     }
 
     protected virtual void LeftHand()
     {
         var _hitbox = Instantiate(hitbox, leftspawn);
-        _hitbox.GetComponent<Renderer>().material.SetColor("_Color", Color.cyan);
+        _hitbox.GetComponent<hitbox>().au_manager = audiomanager;
     }
 }

@@ -84,8 +84,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsUpdating: 0
   pobjects: []
+  lives: 1
   defending: 0
-  maxLife: 60
+  maxLife: 25
   agent: {fileID: 0}
   hitbox: {fileID: 0}
   layermask:
@@ -119,7 +120,7 @@ MonoBehaviour:
   walkagain: 0
   _init: 0
   bendermodel: {fileID: 2095393956112548280}
-  chispas: {fileID: 0}
+  chispas: {fileID: 269186196096346169}
   audiomanager: {fileID: 0}
 --- !u!195 &4904651522618174384
 NavMeshAgent:

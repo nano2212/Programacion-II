@@ -107,7 +107,7 @@ MonoBehaviour:
   smoothrotationn: 10
   freefield: 50
   focusfield: 90
-  tolerancia: 0.5
+  tolerancia: 0.4
   endtransition: 1
 --- !u!135 &6870242716795093457
 SphereCollider:

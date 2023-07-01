@@ -91,11 +91,11 @@ public class PlayerController : LifeEntity
             anim.SetBool("blocking", false);
             defending = false;
         }
-        //Salto
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            anim.SetTrigger("jump");
-        }
+        ////Salto
+        //if (Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    anim.SetTrigger("jump");
+        //}
         //Interactuar
         if (Input.GetButtonDown("Interact"))
         {
@@ -219,15 +219,12 @@ public class PlayerController : LifeEntity
         }
         else
         {
-            Debug.Log("transicion de camera");
             if (focus)
             {
-                Debug.Log(" a free");
                 camcontrol.TransitionMode(focuscampos.position, focus);
             }
             else
             {
-                Debug.Log(" a focus");
                 camcontrol.TransitionMode(freecampos.position, focus);
             }
         }
